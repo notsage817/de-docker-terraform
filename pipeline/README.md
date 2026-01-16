@@ -1,6 +1,24 @@
-This is an initial project that downloads csv and parquet data and then insert them into postgreSQL.
+This is a basic project that read New York taxi trips data from difference sources in different format and load them into PostgreSQL.
 
-Key points:
-- uv used to isolate the environments with different packages - fast when adding python packages, handy when initiating project framework and recording versions in pyproject.toml
-- Read CSV file in pandas and insert thru SQLalchemy engine in chunks
-- Read Parquet file in polars and insert thru 'adbc' engine 10X fasters and stable
+For CSV file, running the command below with input will load data thru SQLalchemy:
+`uv run python ingest_data_pd.py \
+  --pg-user=root \
+  --pg-pass=root \
+  --pg-host=localhost \
+  --pg-port=5432 \
+  --pg-db=ny_taxi \
+  --target-table=yellow_taxi_trips \
+  --year=2021 \
+  --month=1 \
+  --chunksize=100000`
+
+For parquet file, running command below with input will load data thru a 10x faster engine 'adbc':
+`uv run python ingest_data_pq.py \
+  --pg-user=root \
+  --pg-pass=root \
+  --pg-host=localhost \
+  --pg-port=5432 \
+  --pg-db=ny_taxi \
+  --target-table=yellow_taxi_trips \
+  --year=2021 \
+  --month=1`
