@@ -6,7 +6,7 @@ uv init --python=3.3
 ```
 
 #### Containizer the pipeline with virtual environment setup
-```bash
+```dockerfile
 # Start with slim Python 3.13 image
 FROM python:3.13.10-slim
 
