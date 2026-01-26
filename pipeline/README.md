@@ -77,6 +77,7 @@ uv run python ingest_data_pq.py \
   --pg-host=localhost \
   --pg-port=5432 \
   --pg-db=ny_taxi \
+  # --datasource=yellow_tripdata \
   --target-table=yellow_taxi_trips \
   --year=2021 \
   --month=1
