@@ -1,0 +1,18 @@
+id: verify_ny_taxi_connection
+namespace: dev.projects
+
+tasks:
+  - id: check_db
+    type: io.kestra.plugin.jdbc.postgresql.Query
+    url: jdbc:postgresql://pgdatabase:5432/ny_taxi
+    username: root
+    password: root
+    sql: |
+      select * from 
+      green_taxi_trips_202511_pl 
+      limit 5;
+    fetch: true
+
+  - id: log_results
+    type: io.kestra.plugin.core.log.Log
+    message: "Last 5 connection logs: {{ outputs.check_db.rows }}"
